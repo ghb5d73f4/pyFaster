@@ -1,0 +1,832 @@
+
+-*- file info
+- data output directory : ./DATA
+- file prefix           : /home/faster/IPHC/ACQ/DATA/test
+- report file           : /home/faster/IPHC/ACQ/DATA/test.setup
+- data file             : /home/faster/IPHC/ACQ/DATA/test_0001.fast
+
+-*- user provided info
+None
+
+-*- channel groups states
+GERMANIUM : ON
+NONAME : ON
+SYNCHRO : ON
+
+-*- trunk configuration
+Basic_Trunk.Group_Coinc Image
+-----------------------------
+Input  1 :
+--------
+UDP Input :
+  From IP       = 192.168.2.109
+  From Node Num = 3
+  Local port    = 20001
+  Read trames   = 21358
+Trame Input 1 :
+  Trame capacity = 100000
+  Filling max    = 0.0 %
+  Cur filling    = 0.0 %
+  Fmin           = 9.00000E-01 Hz
+  Missed count   = 0
+
+Input  2 :
+--------
+UDP Input :
+  From IP       = 192.168.2.108
+  From Node Num = 3
+  Local port    = 20002
+  Read trames   = 21359
+Trame Input 2 :
+  Trame capacity = 100000
+  Filling max    = 0.0 %
+  Cur filling    = 0.0 %
+  Fmin           = 9.00000E-01 Hz
+  Missed count   = 0
+
+Synchro : 
+----------
+Input 1 enabled :
+Data Fifo : 
+  Data capacity  = 1000000
+  Filling max    = 0.0 %
+Input 2 enabled :
+Data Fifo : 
+  Data capacity  = 1000000
+  Filling max    = 0.0 %
+
+Trigger-Merger
+--------------
+Group_Coinc_V2 :
+----------------
+Trigger_Type                =  BOOLEAN_EXPRESSION_TRIGGER
+Trigger_Enabled             =  TRUE
+Merger_Lossless             =  FALSE
+Trigger_Window_ns           =  10.0
+Before_Window_ns            =  0.0
+After_Window_ns             =  60000.0
+Group_Label                 =  3000
+Boolean_Expression_Trigger  =  1
+Multiplicity_Trigger_Labels =  
+Multiplicity_Trigger_Value  =  1
+Multiplicity_Trigger_Type   =  AT_LEAST
+Followers                   =  5 15
+Valid_Labels                = NO_CONSTRAINT
+
+Data Fifo Filling max = 0.0 %
+Win  Fifo Filling max = 0.0 %
+
+Storage :
+---------
+  Data capacity   = 1000000
+  Filling max     = 0.0 %
+  Cur. Filling    = 0.0 %
+  Cur. File    CF = /home/faster/IPHC/ACQ/DATA/test_0001.fast
+  Nb_Written (CF) = 172503
+
+
+-*- channels configuration
+: ROUGE is part of GERMANIUM
+Channel_Input         = MOSAHR_SMB_1
+Sampling_Output_Range = SAMP_RANGE_X32
+#
+Channel_Enabled       = TRUE
+Input_Inverter        = FALSE
+Raw_Signal_Sub_mV     =  1.50010000000000E+01
+Fast_Out_Low_Shap     = FALSE
+Spectro_Shaping_T     = SH_TIME_2060
+Spectro_Pole_Zero_us  =  5.70000000000000E+01
+Spectro_Bipolar       = FALSE
+Spectro_BLC_BLR       = TRUE
+Spectro_BLR_Thr_mV    =  6.00000000000000E-01
+Spectro_BLR_Gate      =  22.096
+Spectro_BLR_Gate_Auto = TRUE
+Spectro_BLR_High_Fc   = FALSE
+Trigger_Input         = FAST_OUT
+Trigger_Not_Ext       = FALSE
+Trigger_Single_Mode   = FALSE
+Trigger_Thres_mV      =  3.00000000000000E+00
+Trigger_Valid_ns      = T_VALID_GATE_8_NS
+ADC_DSP_Input         = SPECTRO_OUT
+ADC_DSP_Width_Auto    = TRUE
+ADC_DSP_Width_us      =  22.096
+Sampling_Input        = RAW_SIGNAL
+Sampling_Shift        = SAMPLING_SHIFT_50
+Sampling_Decimation   = SAMPLING_DECI_1
+Sampling_Deci_1Samp   = TRUE
+Sampling_X_User_Caption_Used = FALSE
+Sampling_X_ns_To_User_Unit   =  1.00000E-06
+Sampling_X_User_Caption      = ms     
+Sampling_Y_User_Caption_Used = FALSE
+Sampling_Y_mV_To_User_Unit   =  1.00000E+00
+Sampling_Y_User_Caption      = mV     
+Sampling_Rate         = SAMPLING_RATE_100HZ
+State_Rate            = STATE_RATE_1HZ
+DSP_Label             =  5
+Sampling_Label        =  2005
+State_Label           =  1005
+DSP_Type_Alias        =  61
+Sampling_Type_Alias   =  21
+State_Type_Alias      =  70
+DSP_Enabled           = TRUE
+Sampling_Enabled      = TRUE
+State_Enabled         = TRUE
+
+: VERT is part of GERMANIUM
+Channel_Input         = MOSAHR_SMB_3
+Sampling_Output_Range = SAMP_RANGE_X16
+#
+Channel_Enabled       = TRUE
+Input_Inverter        = FALSE
+Raw_Signal_Sub_mV     =  1.50000000000000E+01
+Fast_Out_Low_Shap     = FALSE
+Spectro_Shaping_T     = SH_TIME_2060
+Spectro_Pole_Zero_us  =  5.70000000000000E+01
+Spectro_Bipolar       = FALSE
+Spectro_BLC_BLR       = TRUE
+Spectro_BLR_Thr_mV    =  6.00000000000000E-01
+Spectro_BLR_Gate      =  22.096
+Spectro_BLR_Gate_Auto = TRUE
+Spectro_BLR_High_Fc   = FALSE
+Trigger_Input         = FAST_OUT
+Trigger_Not_Ext       = FALSE
+Trigger_Single_Mode   = FALSE
+Trigger_Thres_mV      =  3.00000000000000E+00
+Trigger_Valid_ns      = T_VALID_GATE_8_NS
+ADC_DSP_Input         = SPECTRO_OUT
+ADC_DSP_Width_Auto    = TRUE
+ADC_DSP_Width_us      =  22.096
+Sampling_Input        = SPECTRO_OUT
+Sampling_Shift        = SAMPLING_SHIFT_25
+Sampling_Decimation   = SAMPLING_DECI_32
+Sampling_Deci_1Samp   = TRUE
+Sampling_X_User_Caption_Used = TRUE
+Sampling_X_ns_To_User_Unit   =  1.00000E-03
+Sampling_X_User_Caption      = us     
+Sampling_Y_User_Caption_Used = FALSE
+Sampling_Y_mV_To_User_Unit   =  1.00000E+00
+Sampling_Y_User_Caption      = mV     
+Sampling_Rate         = SAMPLING_RATE_10HZ
+State_Rate            = STATE_RATE_1HZ
+DSP_Label             =  15
+Sampling_Label        =  2015
+State_Label           =  1015
+DSP_Type_Alias        =  61
+Sampling_Type_Alias   =  21
+State_Type_Alias      =  70
+DSP_Enabled           = TRUE
+Sampling_Enabled      = TRUE
+State_Enabled         = TRUE
+
+: noname is part of NONAME
+Channel_Input         = MOSAHR_SMB_2
+Sampling_Output_Range = SAMP_RANGE_X1
+#
+Channel_Enabled       = TRUE
+Input_Inverter        = FALSE
+Raw_Signal_Sub_mV     =  0.00000000000000E+00
+Fast_Out_Low_Shap     = FALSE
+Spectro_Shaping_T     = SH_TIME_2060
+Spectro_Pole_Zero_us  =  8.12900000000000E+00
+Spectro_Bipolar       = FALSE
+Spectro_BLC_BLR       = TRUE
+Spectro_BLR_Thr_mV    =  6.00000000000000E-01
+Spectro_BLR_Gate      =  22.096
+Spectro_BLR_Gate_Auto = TRUE
+Spectro_BLR_High_Fc   = TRUE
+Trigger_Input         = FAST_OUT
+Trigger_Not_Ext       = FALSE
+Trigger_Single_Mode   = FALSE
+Trigger_Thres_mV      =  8.00000000000000E-01
+Trigger_Valid_ns      = T_VALID_GATE_8_NS
+ADC_DSP_Input         = SPECTRO_OUT
+ADC_DSP_Width_Auto    = TRUE
+ADC_DSP_Width_us      =  22.096
+Sampling_Input        = RAW_SIGNAL
+Sampling_Shift        = SAMPLING_SHIFT_MIN
+Sampling_Decimation   = SAMPLING_DECI_1
+Sampling_Deci_1Samp   = TRUE
+Sampling_X_User_Caption_Used = FALSE
+Sampling_X_ns_To_User_Unit   =  1.00000E+00
+Sampling_X_User_Caption      = ns     
+Sampling_Y_User_Caption_Used = FALSE
+Sampling_Y_mV_To_User_Unit   =  1.00000E+00
+Sampling_Y_User_Caption      = mV     
+Sampling_Rate         = SAMPLING_RATE_10HZ
+State_Rate            = STATE_RATE_1HZ
+DSP_Label             =  2
+Sampling_Label        =  2002
+State_Label           =  1002
+DSP_Type_Alias        =  61
+Sampling_Type_Alias   =  21
+State_Type_Alias      =  70
+DSP_Enabled           = TRUE
+Sampling_Enabled      = TRUE
+State_Enabled         = TRUE
+
+: noname is part of NONAME
+Channel_Input         = MOSAHR_SMB_3
+Sampling_Output_Range = SAMP_RANGE_X1
+#
+Channel_Enabled       = TRUE
+Input_Inverter        = FALSE
+Raw_Signal_Sub_mV     =  0.00000000000000E+00
+Fast_Out_Low_Shap     = FALSE
+Spectro_Shaping_T     = SH_TIME_2060
+Spectro_Pole_Zero_us  =  8.12900000000000E+00
+Spectro_Bipolar       = FALSE
+Spectro_BLC_BLR       = TRUE
+Spectro_BLR_Thr_mV    =  6.00000000000000E-01
+Spectro_BLR_Gate      =  22.096
+Spectro_BLR_Gate_Auto = TRUE
+Spectro_BLR_High_Fc   = TRUE
+Trigger_Input         = FAST_OUT
+Trigger_Not_Ext       = FALSE
+Trigger_Single_Mode   = FALSE
+Trigger_Thres_mV      =  8.00000000000000E-01
+Trigger_Valid_ns      = T_VALID_GATE_8_NS
+ADC_DSP_Input         = SPECTRO_OUT
+ADC_DSP_Width_Auto    = TRUE
+ADC_DSP_Width_us      =  22.096
+Sampling_Input        = RAW_SIGNAL
+Sampling_Shift        = SAMPLING_SHIFT_MIN
+Sampling_Decimation   = SAMPLING_DECI_1
+Sampling_Deci_1Samp   = TRUE
+Sampling_X_User_Caption_Used = FALSE
+Sampling_X_ns_To_User_Unit   =  1.00000E+00
+Sampling_X_User_Caption      = ns     
+Sampling_Y_User_Caption_Used = FALSE
+Sampling_Y_mV_To_User_Unit   =  1.00000E+00
+Sampling_Y_User_Caption      = mV     
+Sampling_Rate         = SAMPLING_RATE_10HZ
+State_Rate            = STATE_RATE_1HZ
+DSP_Label             =  3
+Sampling_Label        =  2003
+State_Label           =  1003
+DSP_Type_Alias        =  61
+Sampling_Type_Alias   =  21
+State_Type_Alias      =  70
+DSP_Enabled           = TRUE
+Sampling_Enabled      = TRUE
+State_Enabled         = TRUE
+
+: noname is part of NONAME
+Channel_Input         = MOSAHR_SMB_4
+Sampling_Output_Range = SAMP_RANGE_X1
+#
+Channel_Enabled       = TRUE
+Input_Inverter        = FALSE
+Raw_Signal_Sub_mV     =  0.00000000000000E+00
+Fast_Out_Low_Shap     = FALSE
+Spectro_Shaping_T     = SH_TIME_2060
+Spectro_Pole_Zero_us  =  8.12900000000000E+00
+Spectro_Bipolar       = FALSE
+Spectro_BLC_BLR       = TRUE
+Spectro_BLR_Thr_mV    =  6.00000000000000E-01
+Spectro_BLR_Gate      =  22.096
+Spectro_BLR_Gate_Auto = TRUE
+Spectro_BLR_High_Fc   = TRUE
+Trigger_Input         = FAST_OUT
+Trigger_Not_Ext       = FALSE
+Trigger_Single_Mode   = FALSE
+Trigger_Thres_mV      =  8.00000000000000E-01
+Trigger_Valid_ns      = T_VALID_GATE_8_NS
+ADC_DSP_Input         = SPECTRO_OUT
+ADC_DSP_Width_Auto    = TRUE
+ADC_DSP_Width_us      =  22.096
+Sampling_Input        = RAW_SIGNAL
+Sampling_Shift        = SAMPLING_SHIFT_MIN
+Sampling_Decimation   = SAMPLING_DECI_1
+Sampling_Deci_1Samp   = TRUE
+Sampling_X_User_Caption_Used = FALSE
+Sampling_X_ns_To_User_Unit   =  1.00000E+00
+Sampling_X_User_Caption      = ns     
+Sampling_Y_User_Caption_Used = FALSE
+Sampling_Y_mV_To_User_Unit   =  1.00000E+00
+Sampling_Y_User_Caption      = mV     
+Sampling_Rate         = SAMPLING_RATE_10HZ
+State_Rate            = STATE_RATE_1HZ
+DSP_Label             =  4
+Sampling_Label        =  2004
+State_Label           =  1004
+DSP_Type_Alias        =  61
+Sampling_Type_Alias   =  21
+State_Type_Alias      =  70
+DSP_Enabled           = TRUE
+Sampling_Enabled      = TRUE
+State_Enabled         = TRUE
+
+: noname is part of NONAME
+Channel_Input         = MOSAHR_SMB_2
+Sampling_Output_Range = SAMP_RANGE_X1
+#
+Channel_Enabled       = TRUE
+Input_Inverter        = FALSE
+Raw_Signal_Sub_mV     =  0.00000000000000E+00
+Fast_Out_Low_Shap     = FALSE
+Spectro_Shaping_T     = SH_TIME_2060
+Spectro_Pole_Zero_us  =  8.12900000000000E+00
+Spectro_Bipolar       = FALSE
+Spectro_BLC_BLR       = TRUE
+Spectro_BLR_Thr_mV    =  6.00000000000000E-01
+Spectro_BLR_Gate      =  22.096
+Spectro_BLR_Gate_Auto = TRUE
+Spectro_BLR_High_Fc   = TRUE
+Trigger_Input         = FAST_OUT
+Trigger_Not_Ext       = FALSE
+Trigger_Single_Mode   = FALSE
+Trigger_Thres_mV      =  8.00000000000000E-01
+Trigger_Valid_ns      = T_VALID_GATE_8_NS
+ADC_DSP_Input         = SPECTRO_OUT
+ADC_DSP_Width_Auto    = TRUE
+ADC_DSP_Width_us      =  22.096
+Sampling_Input        = RAW_SIGNAL
+Sampling_Shift        = SAMPLING_SHIFT_MIN
+Sampling_Decimation   = SAMPLING_DECI_1
+Sampling_Deci_1Samp   = TRUE
+Sampling_X_User_Caption_Used = FALSE
+Sampling_X_ns_To_User_Unit   =  1.00000E+00
+Sampling_X_User_Caption      = ns     
+Sampling_Y_User_Caption_Used = FALSE
+Sampling_Y_mV_To_User_Unit   =  1.00000E+00
+Sampling_Y_User_Caption      = mV     
+Sampling_Rate         = SAMPLING_RATE_10HZ
+State_Rate            = STATE_RATE_1HZ
+DSP_Label             =  6
+Sampling_Label        =  2006
+State_Label           =  1006
+DSP_Type_Alias        =  61
+Sampling_Type_Alias   =  21
+State_Type_Alias      =  70
+DSP_Enabled           = TRUE
+Sampling_Enabled      = TRUE
+State_Enabled         = TRUE
+
+: noname is part of NONAME
+Channel_Input         = MOSAHR_SMB_3
+Sampling_Output_Range = SAMP_RANGE_X1
+#
+Channel_Enabled       = TRUE
+Input_Inverter        = FALSE
+Raw_Signal_Sub_mV     =  0.00000000000000E+00
+Fast_Out_Low_Shap     = FALSE
+Spectro_Shaping_T     = SH_TIME_2060
+Spectro_Pole_Zero_us  =  8.12900000000000E+00
+Spectro_Bipolar       = FALSE
+Spectro_BLC_BLR       = TRUE
+Spectro_BLR_Thr_mV    =  6.00000000000000E-01
+Spectro_BLR_Gate      =  22.096
+Spectro_BLR_Gate_Auto = TRUE
+Spectro_BLR_High_Fc   = TRUE
+Trigger_Input         = FAST_OUT
+Trigger_Not_Ext       = FALSE
+Trigger_Single_Mode   = FALSE
+Trigger_Thres_mV      =  8.00000000000000E-01
+Trigger_Valid_ns      = T_VALID_GATE_8_NS
+ADC_DSP_Input         = SPECTRO_OUT
+ADC_DSP_Width_Auto    = TRUE
+ADC_DSP_Width_us      =  22.096
+Sampling_Input        = RAW_SIGNAL
+Sampling_Shift        = SAMPLING_SHIFT_MIN
+Sampling_Decimation   = SAMPLING_DECI_1
+Sampling_Deci_1Samp   = TRUE
+Sampling_X_User_Caption_Used = FALSE
+Sampling_X_ns_To_User_Unit   =  1.00000E+00
+Sampling_X_User_Caption      = ns     
+Sampling_Y_User_Caption_Used = FALSE
+Sampling_Y_mV_To_User_Unit   =  1.00000E+00
+Sampling_Y_User_Caption      = mV     
+Sampling_Rate         = SAMPLING_RATE_10HZ
+State_Rate            = STATE_RATE_1HZ
+DSP_Label             =  7
+Sampling_Label        =  2007
+State_Label           =  1007
+DSP_Type_Alias        =  61
+Sampling_Type_Alias   =  21
+State_Type_Alias      =  70
+DSP_Enabled           = TRUE
+Sampling_Enabled      = TRUE
+State_Enabled         = TRUE
+
+: noname is part of NONAME
+Channel_Input         = MOSAHR_SMB_4
+Sampling_Output_Range = SAMP_RANGE_X1
+#
+Channel_Enabled       = TRUE
+Input_Inverter        = FALSE
+Raw_Signal_Sub_mV     =  0.00000000000000E+00
+Fast_Out_Low_Shap     = FALSE
+Spectro_Shaping_T     = SH_TIME_2060
+Spectro_Pole_Zero_us  =  8.12900000000000E+00
+Spectro_Bipolar       = FALSE
+Spectro_BLC_BLR       = TRUE
+Spectro_BLR_Thr_mV    =  6.00000000000000E-01
+Spectro_BLR_Gate      =  22.096
+Spectro_BLR_Gate_Auto = TRUE
+Spectro_BLR_High_Fc   = TRUE
+Trigger_Input         = FAST_OUT
+Trigger_Not_Ext       = FALSE
+Trigger_Single_Mode   = FALSE
+Trigger_Thres_mV      =  8.00000000000000E-01
+Trigger_Valid_ns      = T_VALID_GATE_8_NS
+ADC_DSP_Input         = SPECTRO_OUT
+ADC_DSP_Width_Auto    = TRUE
+ADC_DSP_Width_us      =  22.096
+Sampling_Input        = RAW_SIGNAL
+Sampling_Shift        = SAMPLING_SHIFT_MIN
+Sampling_Decimation   = SAMPLING_DECI_1
+Sampling_Deci_1Samp   = TRUE
+Sampling_X_User_Caption_Used = FALSE
+Sampling_X_ns_To_User_Unit   =  1.00000E+00
+Sampling_X_User_Caption      = ns     
+Sampling_Y_User_Caption_Used = FALSE
+Sampling_Y_mV_To_User_Unit   =  1.00000E+00
+Sampling_Y_User_Caption      = mV     
+Sampling_Rate         = SAMPLING_RATE_10HZ
+State_Rate            = STATE_RATE_1HZ
+DSP_Label             =  8
+Sampling_Label        =  2008
+State_Label           =  1008
+DSP_Type_Alias        =  61
+Sampling_Type_Alias   =  21
+State_Type_Alias      =  70
+DSP_Enabled           = TRUE
+Sampling_Enabled      = TRUE
+State_Enabled         = TRUE
+
+: noname is part of NONAME
+Channel_Input         = MOSAHR_SMB_1
+Sampling_Output_Range = SAMP_RANGE_X1
+#
+Channel_Enabled       = TRUE
+Input_Inverter        = FALSE
+Raw_Signal_Sub_mV     =  0.00000000000000E+00
+Fast_Out_Low_Shap     = FALSE
+Spectro_Shaping_T     = SH_TIME_2060
+Spectro_Pole_Zero_us  =  8.12900000000000E+00
+Spectro_Bipolar       = FALSE
+Spectro_BLC_BLR       = TRUE
+Spectro_BLR_Thr_mV    =  6.00000000000000E-01
+Spectro_BLR_Gate      =  22.096
+Spectro_BLR_Gate_Auto = TRUE
+Spectro_BLR_High_Fc   = TRUE
+Trigger_Input         = FAST_OUT
+Trigger_Not_Ext       = FALSE
+Trigger_Single_Mode   = FALSE
+Trigger_Thres_mV      =  8.00000000000000E-01
+Trigger_Valid_ns      = T_VALID_GATE_8_NS
+ADC_DSP_Input         = SPECTRO_OUT
+ADC_DSP_Width_Auto    = TRUE
+ADC_DSP_Width_us      =  22.096
+Sampling_Input        = RAW_SIGNAL
+Sampling_Shift        = SAMPLING_SHIFT_MIN
+Sampling_Decimation   = SAMPLING_DECI_1
+Sampling_Deci_1Samp   = TRUE
+Sampling_X_User_Caption_Used = FALSE
+Sampling_X_ns_To_User_Unit   =  1.00000E+00
+Sampling_X_User_Caption      = ns     
+Sampling_Y_User_Caption_Used = FALSE
+Sampling_Y_mV_To_User_Unit   =  1.00000E+00
+Sampling_Y_User_Caption      = mV     
+Sampling_Rate         = SAMPLING_RATE_10HZ
+State_Rate            = STATE_RATE_1HZ
+DSP_Label             =  9
+Sampling_Label        =  2009
+State_Label           =  1009
+DSP_Type_Alias        =  61
+Sampling_Type_Alias   =  21
+State_Type_Alias      =  70
+DSP_Enabled           = TRUE
+Sampling_Enabled      = TRUE
+State_Enabled         = TRUE
+
+: noname is part of NONAME
+Channel_Input         = MOSAHR_SMB_2
+Sampling_Output_Range = SAMP_RANGE_X1
+#
+Channel_Enabled       = TRUE
+Input_Inverter        = FALSE
+Raw_Signal_Sub_mV     =  0.00000000000000E+00
+Fast_Out_Low_Shap     = FALSE
+Spectro_Shaping_T     = SH_TIME_2060
+Spectro_Pole_Zero_us  =  8.12900000000000E+00
+Spectro_Bipolar       = FALSE
+Spectro_BLC_BLR       = TRUE
+Spectro_BLR_Thr_mV    =  6.00000000000000E-01
+Spectro_BLR_Gate      =  22.096
+Spectro_BLR_Gate_Auto = TRUE
+Spectro_BLR_High_Fc   = TRUE
+Trigger_Input         = FAST_OUT
+Trigger_Not_Ext       = FALSE
+Trigger_Single_Mode   = FALSE
+Trigger_Thres_mV      =  8.00000000000000E-01
+Trigger_Valid_ns      = T_VALID_GATE_8_NS
+ADC_DSP_Input         = SPECTRO_OUT
+ADC_DSP_Width_Auto    = TRUE
+ADC_DSP_Width_us      =  22.096
+Sampling_Input        = RAW_SIGNAL
+Sampling_Shift        = SAMPLING_SHIFT_MIN
+Sampling_Decimation   = SAMPLING_DECI_1
+Sampling_Deci_1Samp   = TRUE
+Sampling_X_User_Caption_Used = FALSE
+Sampling_X_ns_To_User_Unit   =  1.00000E+00
+Sampling_X_User_Caption      = ns     
+Sampling_Y_User_Caption_Used = FALSE
+Sampling_Y_mV_To_User_Unit   =  1.00000E+00
+Sampling_Y_User_Caption      = mV     
+Sampling_Rate         = SAMPLING_RATE_10HZ
+State_Rate            = STATE_RATE_1HZ
+DSP_Label             =  10
+Sampling_Label        =  2010
+State_Label           =  1010
+DSP_Type_Alias        =  61
+Sampling_Type_Alias   =  21
+State_Type_Alias      =  70
+DSP_Enabled           = TRUE
+Sampling_Enabled      = TRUE
+State_Enabled         = TRUE
+
+: noname is part of NONAME
+Channel_Input         = MOSAHR_SMB_3
+Sampling_Output_Range = SAMP_RANGE_X1
+#
+Channel_Enabled       = TRUE
+Input_Inverter        = FALSE
+Raw_Signal_Sub_mV     =  0.00000000000000E+00
+Fast_Out_Low_Shap     = FALSE
+Spectro_Shaping_T     = SH_TIME_2060
+Spectro_Pole_Zero_us  =  8.12900000000000E+00
+Spectro_Bipolar       = FALSE
+Spectro_BLC_BLR       = TRUE
+Spectro_BLR_Thr_mV    =  6.00000000000000E-01
+Spectro_BLR_Gate      =  22.096
+Spectro_BLR_Gate_Auto = TRUE
+Spectro_BLR_High_Fc   = TRUE
+Trigger_Input         = FAST_OUT
+Trigger_Not_Ext       = FALSE
+Trigger_Single_Mode   = FALSE
+Trigger_Thres_mV      =  8.00000000000000E-01
+Trigger_Valid_ns      = T_VALID_GATE_8_NS
+ADC_DSP_Input         = SPECTRO_OUT
+ADC_DSP_Width_Auto    = TRUE
+ADC_DSP_Width_us      =  22.096
+Sampling_Input        = RAW_SIGNAL
+Sampling_Shift        = SAMPLING_SHIFT_MIN
+Sampling_Decimation   = SAMPLING_DECI_1
+Sampling_Deci_1Samp   = TRUE
+Sampling_X_User_Caption_Used = FALSE
+Sampling_X_ns_To_User_Unit   =  1.00000E+00
+Sampling_X_User_Caption      = ns     
+Sampling_Y_User_Caption_Used = FALSE
+Sampling_Y_mV_To_User_Unit   =  1.00000E+00
+Sampling_Y_User_Caption      = mV     
+Sampling_Rate         = SAMPLING_RATE_10HZ
+State_Rate            = STATE_RATE_1HZ
+DSP_Label             =  11
+Sampling_Label        =  2011
+State_Label           =  1011
+DSP_Type_Alias        =  61
+Sampling_Type_Alias   =  21
+State_Type_Alias      =  70
+DSP_Enabled           = TRUE
+Sampling_Enabled      = TRUE
+State_Enabled         = TRUE
+
+: noname is part of NONAME
+Channel_Input         = MOSAHR_SMB_4
+Sampling_Output_Range = SAMP_RANGE_X1
+#
+Channel_Enabled       = TRUE
+Input_Inverter        = FALSE
+Raw_Signal_Sub_mV     =  0.00000000000000E+00
+Fast_Out_Low_Shap     = FALSE
+Spectro_Shaping_T     = SH_TIME_2060
+Spectro_Pole_Zero_us  =  8.12900000000000E+00
+Spectro_Bipolar       = FALSE
+Spectro_BLC_BLR       = TRUE
+Spectro_BLR_Thr_mV    =  6.00000000000000E-01
+Spectro_BLR_Gate      =  22.096
+Spectro_BLR_Gate_Auto = TRUE
+Spectro_BLR_High_Fc   = TRUE
+Trigger_Input         = FAST_OUT
+Trigger_Not_Ext       = FALSE
+Trigger_Single_Mode   = FALSE
+Trigger_Thres_mV      =  8.00000000000000E-01
+Trigger_Valid_ns      = T_VALID_GATE_8_NS
+ADC_DSP_Input         = SPECTRO_OUT
+ADC_DSP_Width_Auto    = TRUE
+ADC_DSP_Width_us      =  22.096
+Sampling_Input        = RAW_SIGNAL
+Sampling_Shift        = SAMPLING_SHIFT_MIN
+Sampling_Decimation   = SAMPLING_DECI_1
+Sampling_Deci_1Samp   = TRUE
+Sampling_X_User_Caption_Used = FALSE
+Sampling_X_ns_To_User_Unit   =  1.00000E+00
+Sampling_X_User_Caption      = ns     
+Sampling_Y_User_Caption_Used = FALSE
+Sampling_Y_mV_To_User_Unit   =  1.00000E+00
+Sampling_Y_User_Caption      = mV     
+Sampling_Rate         = SAMPLING_RATE_10HZ
+State_Rate            = STATE_RATE_1HZ
+DSP_Label             =  12
+Sampling_Label        =  2012
+State_Label           =  1012
+DSP_Type_Alias        =  61
+Sampling_Type_Alias   =  21
+State_Type_Alias      =  70
+DSP_Enabled           = TRUE
+Sampling_Enabled      = TRUE
+State_Enabled         = TRUE
+
+: noname is part of NONAME
+Channel_Input         = MOSAHR_SMB_1
+Sampling_Output_Range = SAMP_RANGE_X1
+#
+Channel_Enabled       = TRUE
+Input_Inverter        = FALSE
+Raw_Signal_Sub_mV     =  0.00000000000000E+00
+Fast_Out_Low_Shap     = FALSE
+Spectro_Shaping_T     = SH_TIME_2060
+Spectro_Pole_Zero_us  =  8.12900000000000E+00
+Spectro_Bipolar       = FALSE
+Spectro_BLC_BLR       = TRUE
+Spectro_BLR_Thr_mV    =  6.00000000000000E-01
+Spectro_BLR_Gate      =  22.096
+Spectro_BLR_Gate_Auto = TRUE
+Spectro_BLR_High_Fc   = TRUE
+Trigger_Input         = FAST_OUT
+Trigger_Not_Ext       = FALSE
+Trigger_Single_Mode   = FALSE
+Trigger_Thres_mV      =  8.00000000000000E-01
+Trigger_Valid_ns      = T_VALID_GATE_8_NS
+ADC_DSP_Input         = SPECTRO_OUT
+ADC_DSP_Width_Auto    = TRUE
+ADC_DSP_Width_us      =  22.096
+Sampling_Input        = RAW_SIGNAL
+Sampling_Shift        = SAMPLING_SHIFT_MIN
+Sampling_Decimation   = SAMPLING_DECI_1
+Sampling_Deci_1Samp   = TRUE
+Sampling_X_User_Caption_Used = FALSE
+Sampling_X_ns_To_User_Unit   =  1.00000E+00
+Sampling_X_User_Caption      = ns     
+Sampling_Y_User_Caption_Used = FALSE
+Sampling_Y_mV_To_User_Unit   =  1.00000E+00
+Sampling_Y_User_Caption      = mV     
+Sampling_Rate         = SAMPLING_RATE_10HZ
+State_Rate            = STATE_RATE_1HZ
+DSP_Label             =  13
+Sampling_Label        =  2013
+State_Label           =  1013
+DSP_Type_Alias        =  61
+Sampling_Type_Alias   =  21
+State_Type_Alias      =  70
+DSP_Enabled           = TRUE
+Sampling_Enabled      = TRUE
+State_Enabled         = TRUE
+
+: noname is part of NONAME
+Channel_Input         = MOSAHR_SMB_2
+Sampling_Output_Range = SAMP_RANGE_X1
+#
+Channel_Enabled       = TRUE
+Input_Inverter        = FALSE
+Raw_Signal_Sub_mV     =  0.00000000000000E+00
+Fast_Out_Low_Shap     = FALSE
+Spectro_Shaping_T     = SH_TIME_2060
+Spectro_Pole_Zero_us  =  8.12900000000000E+00
+Spectro_Bipolar       = FALSE
+Spectro_BLC_BLR       = TRUE
+Spectro_BLR_Thr_mV    =  6.00000000000000E-01
+Spectro_BLR_Gate      =  22.096
+Spectro_BLR_Gate_Auto = TRUE
+Spectro_BLR_High_Fc   = TRUE
+Trigger_Input         = FAST_OUT
+Trigger_Not_Ext       = FALSE
+Trigger_Single_Mode   = FALSE
+Trigger_Thres_mV      =  8.00000000000000E-01
+Trigger_Valid_ns      = T_VALID_GATE_8_NS
+ADC_DSP_Input         = SPECTRO_OUT
+ADC_DSP_Width_Auto    = TRUE
+ADC_DSP_Width_us      =  22.096
+Sampling_Input        = RAW_SIGNAL
+Sampling_Shift        = SAMPLING_SHIFT_MIN
+Sampling_Decimation   = SAMPLING_DECI_1
+Sampling_Deci_1Samp   = TRUE
+Sampling_X_User_Caption_Used = FALSE
+Sampling_X_ns_To_User_Unit   =  1.00000E+00
+Sampling_X_User_Caption      = ns     
+Sampling_Y_User_Caption_Used = FALSE
+Sampling_Y_mV_To_User_Unit   =  1.00000E+00
+Sampling_Y_User_Caption      = mV     
+Sampling_Rate         = SAMPLING_RATE_10HZ
+State_Rate            = STATE_RATE_1HZ
+DSP_Label             =  14
+Sampling_Label        =  2014
+State_Label           =  1014
+DSP_Type_Alias        =  61
+Sampling_Type_Alias   =  21
+State_Type_Alias      =  70
+DSP_Enabled           = TRUE
+Sampling_Enabled      = TRUE
+State_Enabled         = TRUE
+
+: noname is part of NONAME
+Channel_Input         = MOSAHR_SMB_4
+Sampling_Output_Range = SAMP_RANGE_X1
+#
+Channel_Enabled       = TRUE
+Input_Inverter        = FALSE
+Raw_Signal_Sub_mV     =  0.00000000000000E+00
+Fast_Out_Low_Shap     = FALSE
+Spectro_Shaping_T     = SH_TIME_2060
+Spectro_Pole_Zero_us  =  8.12900000000000E+00
+Spectro_Bipolar       = FALSE
+Spectro_BLC_BLR       = TRUE
+Spectro_BLR_Thr_mV    =  6.00000000000000E-01
+Spectro_BLR_Gate      =  22.096
+Spectro_BLR_Gate_Auto = TRUE
+Spectro_BLR_High_Fc   = TRUE
+Trigger_Input         = FAST_OUT
+Trigger_Not_Ext       = FALSE
+Trigger_Single_Mode   = FALSE
+Trigger_Thres_mV      =  8.00000000000000E-01
+Trigger_Valid_ns      = T_VALID_GATE_8_NS
+ADC_DSP_Input         = SPECTRO_OUT
+ADC_DSP_Width_Auto    = TRUE
+ADC_DSP_Width_us      =  22.096
+Sampling_Input        = RAW_SIGNAL
+Sampling_Shift        = SAMPLING_SHIFT_MIN
+Sampling_Decimation   = SAMPLING_DECI_1
+Sampling_Deci_1Samp   = TRUE
+Sampling_X_User_Caption_Used = FALSE
+Sampling_X_ns_To_User_Unit   =  1.00000E+00
+Sampling_X_User_Caption      = ns     
+Sampling_Y_User_Caption_Used = FALSE
+Sampling_Y_mV_To_User_Unit   =  1.00000E+00
+Sampling_Y_User_Caption      = mV     
+Sampling_Rate         = SAMPLING_RATE_10HZ
+State_Rate            = STATE_RATE_1HZ
+DSP_Label             =  16
+Sampling_Label        =  2016
+State_Label           =  1016
+DSP_Type_Alias        =  61
+Sampling_Type_Alias   =  21
+State_Type_Alias      =  70
+DSP_Enabled           = TRUE
+Sampling_Enabled      = TRUE
+State_Enabled         = TRUE
+
+: T0 is part of SYNCHRO
+Channel_Input         = MOSAHR_SMB_1
+Sampling_Output_Range = SAMP_RANGE_X64
+#
+Channel_Enabled       = TRUE
+Input_Inverter        = TRUE
+Raw_Signal_Sub_mV     =  0.00000000000000E+00
+Fast_Out_Low_Shap     = FALSE
+Spectro_Shaping_T     = SH_TIME_2060
+Spectro_Pole_Zero_us  =  8.12900000000000E+00
+Spectro_Bipolar       = FALSE
+Spectro_BLC_BLR       = TRUE
+Spectro_BLR_Thr_mV    =  6.00000000000000E-01
+Spectro_BLR_Gate      =  22.096
+Spectro_BLR_Gate_Auto = TRUE
+Spectro_BLR_High_Fc   = FALSE
+Trigger_Input         = FAST_OUT
+Trigger_Not_Ext       = FALSE
+Trigger_Single_Mode   = FALSE
+Trigger_Thres_mV      =  2.00000000000000E+00
+Trigger_Valid_ns      = T_VALID_GATE_8_NS
+ADC_DSP_Input         = SPECTRO_OUT
+ADC_DSP_Width_Auto    = TRUE
+ADC_DSP_Width_us      =  22.096
+Sampling_Input        = FAST_OUT
+Sampling_Shift        = SAMPLING_SHIFT_25
+Sampling_Decimation   = SAMPLING_DECI_1
+Sampling_Deci_1Samp   = TRUE
+Sampling_X_User_Caption_Used = FALSE
+Sampling_X_ns_To_User_Unit   =  1.00000E-06
+Sampling_X_User_Caption      = ms     
+Sampling_Y_User_Caption_Used = FALSE
+Sampling_Y_mV_To_User_Unit   =  1.00000E+00
+Sampling_Y_User_Caption      = mV     
+Sampling_Rate         = SAMPLING_RATE_10HZ
+State_Rate            = STATE_RATE_1HZ
+DSP_Label             =  1
+Sampling_Label        =  2001
+State_Label           =  1001
+DSP_Type_Alias        =  61
+Sampling_Type_Alias   =  21
+State_Type_Alias      =  70
+DSP_Enabled           = TRUE
+Sampling_Enabled      = TRUE
+State_Enabled         = TRUE
+
+
+-*- t0 for this run
+YES : t0 was required by user
+
+- Event count  : 60211
+- Start date   : 13-06-2017 16:19:32
+- Stop date    : 13-06-2017 16:20:50
+
