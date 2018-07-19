@@ -1,0 +1,12 @@
+name: my-environment
+channels:
+  - conda-forge
+dependencies:
+  - python
+  - numpy
+  - psutil
+  - toolz
+  - matplotlib
+  - pandas
+  - ipywidgets
+  - jupyter_contrib_nbextensions
