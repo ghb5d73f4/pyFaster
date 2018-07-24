@@ -13,3 +13,5 @@ Module docstring
 
 from .event import *
 from .file_reader import *
+import const
+

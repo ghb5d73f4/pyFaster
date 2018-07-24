@@ -1,12 +1,11 @@
 import faster
 
 
-f = faster.File_reader("data/test_0001.fast", 250)
+f = faster.File_reader("data/test_0001.fast", 150)
 
 for evt in f:
-    if evt.type_alias==10:
+    if evt.type_alias!=70:
+        print(evt)
+    else:
         print(evt._repr_head())
-        for subevt in evt.data:
-            print("\t"+str(subevt))
-    
 

@@ -13,14 +13,12 @@ Faster File reader
 
 import struct 
 
+# faster modules
 import event
+import const
 
 class File_reader(object):
     """Stream FASTER events from file"""
-
-    _header_fmt = "! B B BBBBBB H H"
-#    _header_size = struct.calcsize(FasterFileReader._header_fmt) 
-
 
     def __init__(self, evtfile="", maxnevents=-1):
         """Creator
@@ -31,8 +29,6 @@ class File_reader(object):
         """
         self.fpath = evtfile
         self.infile = None
-        self.fmt = self._header_fmt
-        self._header_size = struct.calcsize(self._header_fmt)
         self.maxnevents=maxnevents
         self._nevent=0
         if (evtfile!=""):
@@ -57,18 +53,22 @@ class File_reader(object):
 
     @staticmethod
     def read_header(data):
-        type_alias, magic, clock1, clock2, clock3, clock4, clock5, clock6, label, load_size = struct.unpack(FasterFileReader._header_fmt, data)
-        header = dict(zip(
-                    "type_alias,magic,clock1,clock2,clock3,clock4,clock5,clock6,label,load_size".split(","),
-                    map( int, [type_alias, magic, clock1, clock2, clock3, clock4, clock5, clock6, label, load_size])
-                    ) )
+        print(data.encode("hex"))
+        type_alias, clock, magic, label, load_size = struct.unpack(const.header_fmt, data)
+        header = {
+            'type_alias': int(type_alias),
+            'clock': clock,
+            'magic': magic,
+            'label': int(label),
+            'load_size': int(load_size),
+            }
         return header
 
     @staticmethod
     def read_data(src, head):
         data=""
         if head['load_size']>0:
-            data = src.read(struct.calcsize('c'*(head['load_size']/2**8)))
+            data = src.read(struct.calcsize(str(head['load_size'])+'c'))
         return data
 
     def next(self):
@@ -76,7 +76,7 @@ class File_reader(object):
         if ((self._nevent > self.maxnevents) and
             not self.maxnevents==-1):
             raise StopIteration
-        head_data = self.infile.read(self._header_size)
+        head_data = self.infile.read(const.header_size)
         if not head_data:
             raise StopIteration
         else:

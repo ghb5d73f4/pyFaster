@@ -11,5 +11,7 @@
 Module docstring
 '''
 
-from .event import event
-from .file_reader import file_reader
+from .event import *
+from .file_reader import *
+import .const as const
+

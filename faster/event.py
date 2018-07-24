@@ -15,17 +15,16 @@ import struct
 from cStringIO import StringIO as StringBuffer
 
 import file_reader
+import const
 
 class Event(object):
     def __init__(self, header,
                  data):
         self.type_alias=header['type_alias']
         self.magic=header['magic']
-        self.time = header['clock1']+header['clock2']*255.+\
-            header['clock3']*255*255+header['clock4']*255*255*255+\
-            header['clock5']*255*255*255*255+header['clock6']*255*255*255*255*255
+        self.time = header['clock'].encode("hex")
         self.label=header['label']
-        self.load_size=header['load_size']/256
+        self.load_size=header['load_size']
         self.data=data
         if self.type_alias==70:
             self._unpack_type_70()
@@ -54,12 +53,12 @@ class Event(object):
         # A group is just some generic events...
         the_data=StringBuffer(self.data)
         group_evt = []
-        head_data =the_data.read(struct.calcsize(file_reader.File_reader._header_fmt))
+        head_data =the_data.read(const.header_size)
         while(head_data):
             header = file_reader.File_reader.read_header(head_data)
             evt_data = file_reader.File_reader.read_data(the_data, header)
             group_evt.append(Event(header, data=evt_data))
-            head_data =the_data.read(struct.calcsize(file_reader.File_reader._header_fmt))
+            head_data =the_data.read(const.header_size)
             pass
         self.data = group_evt
         
