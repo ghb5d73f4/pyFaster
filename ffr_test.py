@@ -1,7 +1,7 @@
-from read_faster import FasterFileReader as ffr
+import faster
 
 
-f = ffr("test_0001.fast", 250)
+f = faster.File_reader("data/test_0001.fast", 250)
 
 for evt in f:
     if evt.type_alias==10:
