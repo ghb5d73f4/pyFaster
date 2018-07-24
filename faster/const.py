@@ -26,5 +26,8 @@ header_size = struct.calcsize(header_fmt)
 
 
 type_alias = {
+    70: 'adc_scaler',
+    10: 'group',
+    61: 'adc_event',
 }
 

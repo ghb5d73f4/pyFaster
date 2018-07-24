@@ -12,14 +12,16 @@ Module docstring
 '''
 import struct
 
-from cStringIO import StringIO as StringBuffer
+from io import BytesIO as StringBuffer
 
 import file_reader
+import const
 
 class Event(object):
     def __init__(self, header,
                  data):
         self.type_alias=header['type_alias']
+        self.type = const.type_alias.get(self.type_alias, 'FASTER event')
         self.magic=header['magic']
         self.time = header['clock'].encode("hex")
         self.label=header['label']
@@ -35,7 +37,7 @@ class Event(object):
 
     def _unpack_type_61(self):
         the_data = self.data
-        high, low = struct.unpack("!LL", the_data)
+        high, low = struct.unpack("<LL", the_data)
         delta_t = high & 0x003FFFC0  >>6
         measure = low & 0xFFFFFC00 >> 10
         rnge= low & 0x00000380 >> 7
@@ -66,14 +68,14 @@ class Event(object):
     def _unpack_type_70(self):
         '''unpack ADC scaler data'''
         the_data=self.data
-        if not len(the_data)==struct.calcsize('!LLL'):
+        if not len(the_data)==struct.calcsize('<LLL'):
             return 0
-        calc,sent,trig = struct.unpack("!LLL", the_data)
+        calc,sent,trig = struct.unpack("<LLL", the_data)
         self.data = {'calc':calc, 'sent':sent, 'trig':trig}
 
     def _repr_head(self):
-        return "<FasterData TYPE={s.type_alias}, CLOCK={s.time}, LABEL={s.label}, MAGIC={s.magic}, LOAD_SIZE={s.load_size}>".format(s=self)
+        return "<{s.type}, CLOCK={s.time}, LABEL={s.label}, LOAD_SIZE={s.load_size}>".format(s=self)
 
     def __repr__(self):
-        return "<FasterData TYPE={s.type_alias}, CLOCK={s.time}, LABEL={s.label}, MAGIC={s.magic}, LOAD_SIZE={s.load_size}, DATA='{s.data}'>".format(s=self)
+        return "<{s.type}, CLOCK={s.time}, LABEL={s.label}, LOAD_SIZE={s.load_size}, DATA='{s.data}'>".format(s=self)
     pass
