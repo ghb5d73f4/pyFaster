@@ -14,8 +14,8 @@ Faster File reader
 import struct 
 
 # faster modules
-import event
-import const
+import faster.event 
+import faster.const 
 
 class File_reader(object):
     """Stream FASTER events from file"""
@@ -54,7 +54,7 @@ class File_reader(object):
     @staticmethod
     def read_header(data):
         #print(data.encode("hex"))
-        type_alias, clock, magic, label, load_size = struct.unpack(const.header_fmt, data)
+        type_alias, clock, magic, label, load_size = struct.unpack(faster.const.header_fmt, data)
         header = {
             'type_alias': int(type_alias),
             'clock': clock,
@@ -71,17 +71,20 @@ class File_reader(object):
             data = src.read(struct.calcsize(str(head['load_size'])+'c'))
         return data
 
+    def __next__(self):
+        return self.next()
+        
     def next(self):
         """next() -> TNTEvent"""
         if ((self._nevent > self.maxnevents) and
             not self.maxnevents==-1):
             raise StopIteration
-        head_data = self.infile.read(const.header_size)
+        head_data = self.infile.read(faster.const.header_size)
         if not head_data:
             raise StopIteration
         else:
             self._nevent+=1
             header =  self.read_header(head_data)
             evt_data = self.read_data(self.infile, header)
-            return event.Event(header, data=evt_data)
+            return faster.event.Event(header, data=evt_data)
         pass #en
