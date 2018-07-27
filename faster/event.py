@@ -41,9 +41,9 @@ class Event(object):
         high, low = struct.unpack("<LL", self.rawdata)
         delta_t = high & 0x003FFFC0  >> 6
         measure = low & 0xFFFFFC00 >> 10
-        rnge= low & 0x00000380 >> 7
+        rnge = low & 0x00000380 >> 7
         saturated=low & 0x00000002 >> 1
-        pileup= low & 0x00000001 >> 7
+        pileup = low & 0x00000001 >> 7
         self.data = {'dt':int(delta_t),
                      'value':measure,
                      'range':int(rnge),
@@ -53,7 +53,7 @@ class Event(object):
     def _unpack_type_10(self):
         '''unpack Group data'''
         # A group is just some generic events...
-        the_data=StringBuffer(self.rawdata)
+        the_data = StringBuffer(self.rawdata)
         group_evt = []
         head_data =the_data.read(faster.const.header_size)
         while(head_data):

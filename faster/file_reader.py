@@ -68,7 +68,7 @@ class File_reader(object):
     def read_data(src, head):
         data=""
         if head['load_size']>0:
-            data = src.read(struct.calcsize(str(head['load_size'])+'c'))
+            data = src.read(struct.calcsize("<"+str(head['load_size'])+'s'))
         return data
 
     def __next__(self):
