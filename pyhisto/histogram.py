@@ -90,7 +90,7 @@ class Histogram(object):
         z+='# nbins = {0}\n'.format(self.nbins)
         z+='# xmin = {0}\n'.format(self.xmin)
         z+='# xmax = {0}\n'.format(self.xmax)
-        for i in xrange(0, self.nbins):
+        for i in range(0, self.nbins):
             z+="{0} \n".format(str(self.bins[i]))
             pass
         z+='# out of range = {0}\n'.format(self.outofrange)

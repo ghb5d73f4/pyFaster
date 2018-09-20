@@ -12,17 +12,24 @@ Module docstring
 '''
 
 import struct
+import math
 
+
+# Max size of file is 2GB, events are at least 12 bytes long
+max_number_of_events_in_file = 180000000
+
+# Max amplitude in ADC data
+adc_coding_size = 22
+max_adc_amplitude = int(math.pow(2, adc_coding_size-1))
 
 tick_seconds = 2.0e-9
 tick_ns = 2.0
 
-header_byte_size = 12 # from doc
+header_byte_size = 12 
 clock_byte_size = 6
-#header_fmt = "! B B "+str(clock_byte_size)+"s H H"
-header_fmt = "< B "+str(clock_byte_size)+"s B H H" # from my own research
+header_fmt = "< B B "+str(clock_byte_size)+"s H H"
 header_size = struct.calcsize(header_fmt)
-
+clock_fmt = "<"+str(clock_byte_size)+"B"
 
 
 type_alias = {

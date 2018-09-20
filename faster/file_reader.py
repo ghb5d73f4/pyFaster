@@ -9,6 +9,11 @@
  
 '''
 Faster File reader
+
+Imports
+ - struct, 
+ - faster.event
+ - faster.const
 '''
 
 import struct 
@@ -20,7 +25,7 @@ import faster.const
 class File_reader(object):
     """Stream FASTER events from file"""
 
-    def __init__(self, evtfile="", maxnevents=-1):
+    def __init__(self, evtfile="", maxnevents=faster.const.max_number_of_events_in_file):
         """Creator
         
         Keyword arguments:
@@ -29,8 +34,8 @@ class File_reader(object):
         """
         self.fpath = evtfile
         self.infile = None
-        self.maxnevents=maxnevents
-        self._nevent=0
+        self.maxnevents = maxnevents
+        self._nevent = 0
         if (evtfile!=""):
             self.open(self.fpath)
             pass
@@ -54,30 +59,31 @@ class File_reader(object):
     @staticmethod
     def read_header(data):
         #print(data.encode("hex"))
-        type_alias, clock, magic, label, load_size = struct.unpack(faster.const.header_fmt, data)
-        header = {
+        type_alias,  magic, clock, label, load_size = struct.unpack(faster.const.header_fmt, data)
+        # computing clock
+        clock_words = struct.unpack(faster.const.clock_fmt, clock)
+        time = sum([x*m for x,m in zip(clock_words,
+                                       [1, 256, 65536, 16777216, 4294967296, 1099511627776])])
+        return {    
             'type_alias': int(type_alias),
-            'clock': clock,
+            'clock': time*faster.const.tick_ns,
             'magic': magic,
-            'label': int(label),
-            'load_size': int(load_size),
+            'label': label,
+            'load_size': load_size,
             }
-        return header
+
 
     @staticmethod
     def read_data(src, head):
-        data=""
-        if head['load_size']>0:
-            data = src.read(struct.calcsize("<"+str(head['load_size'])+'s'))
-        return data
+        return src.read(head['load_size'])#struct.calcsize("<"+str(head['load_size'])+'s'))
 
-    def __next__(self):
-        return self.next()
-        
     def next(self):
+        ''' for py2.7 compataibility'''
+        return self.__next__()
+        
+    def __next__(self):
         """next() -> TNTEvent"""
-        if ((self._nevent > self.maxnevents) and
-            not self.maxnevents==-1):
+        if (self._nevent >= self.maxnevents) :
             raise StopIteration
         head_data = self.infile.read(faster.const.header_size)
         if not head_data:
