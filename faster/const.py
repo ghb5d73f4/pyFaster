@@ -27,14 +27,16 @@ tick_ns = 2.0
 
 header_byte_size = 12 
 clock_byte_size = 6
-header_fmt = "< B B "+str(clock_byte_size)+"s H H"
+header_fmt = "< B B "+str(clock_byte_size)+"B H H"
 header_size = struct.calcsize(header_fmt)
 clock_fmt = "<"+str(clock_byte_size)+"B"
+clock_multipliers = [1, 256, 65536, 16777216, 4294967296, 1099511627776]
 
 
 type_alias = {
     70: 'adc_scaler',
     10: 'group',
     61: 'adc_event',
+    62: 'trapez_event',
 }
 

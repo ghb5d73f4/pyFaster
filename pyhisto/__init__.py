@@ -10,4 +10,5 @@
 '''
 
 from .histogram import Histogram
+from .lazy_histogram import LazyHistogram
 from .histogram2D import Histogram2D

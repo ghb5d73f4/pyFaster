@@ -9,29 +9,36 @@
  
 '''
 Faster File reader
+
+Imports
+ - struct, 
+ - faster.event
+ - faster.const
 '''
 
 import struct 
 
 # faster modules
-import event
-import const
+import faster.event 
+import faster.const 
 
 class File_reader(object):
     """Stream FASTER events from file"""
 
-    def __init__(self, evtfile="", maxnevents=-1):
+    def __init__(self, 
+                 fasterfile="", 
+                 maxnevents=faster.const.max_number_of_events_in_file):
         """Creator
         
         Keyword arguments:
         evtfile -- path to file to stream
         maxnevents -- number of events to read at most (default = -1 i.e. infinity
         """
-        self.fpath = evtfile
+        self.fpath = fasterfile
         self.infile = None
-        self.maxnevents=maxnevents
-        self._nevent=0
-        if (evtfile!=""):
+        self.maxnevents = maxnevents
+        self._nevent = 0
+        if (fasterfile!=""):
             self.open(self.fpath)
             pass
         pass
@@ -45,6 +52,7 @@ class File_reader(object):
         Keyword arguments:
         fp -- path file
         """
+        ### ADD: checks of file exists and is file.
         self.infile = open(fp, 'rb')
         pass
     
@@ -52,36 +60,48 @@ class File_reader(object):
         return self
 
     @staticmethod
+    def _multiply(x,y):
+        '''simple multiply function used for time calculation'''
+        return x*y
+    
+    @staticmethod
     def read_header(data):
-        print(data.encode("hex"))
-        type_alias, clock, magic, label, load_size = struct.unpack(const.header_fmt, data)
-        header = {
-            'type_alias': int(type_alias),
-            'clock': clock,
-            'magic': magic,
-            'label': int(label),
-            'load_size': int(load_size),
+        '''Static method, unpacked a header from data'''
+        #type_alias,  magic, clock[], label, load_size 
+        updata = faster.const.the_header_unpacker.unpack(data)
+        #print(updata)
+        # computing clock
+        time = sum(map(faster.File_reader._multiply,
+                       updata[2:8],
+                       faster.const.clock_multipliers))
+        return {    
+            'type_alias': updata[0],
+            'clock': time,
+            #'magic': updata[1], # magic is not useful
+            'label': updata[-2],
+            'load_size': updata[-1],
             }
-        return header
+
 
     @staticmethod
     def read_data(src, head):
-        data=""
-        if head['load_size']>0:
-            data = src.read(struct.calcsize(str(head['load_size'])+'c'))
-        return data
+        ''' Return head[load_size] from the src'''
+        return src.read(head['load_size'])
 
     def next(self):
-        """next() -> TNTEvent"""
-        if ((self._nevent > self.maxnevents) and
-            not self.maxnevents==-1):
+        ''' for py2.7 compataibility'''
+        return self.__next__()
+        
+    def __next__(self):
+        """return next event in files, including data"""
+        if (self._nevent >= self.maxnevents) :
             raise StopIteration
-        head_data = self.infile.read(const.header_size)
+        head_data = self.infile.read(faster.const.header_size)
         if not head_data:
             raise StopIteration
         else:
             self._nevent+=1
             header =  self.read_header(head_data)
             evt_data = self.read_data(self.infile, header)
-            return event.Event(header, data=evt_data)
+            return faster.event.Event(header, data=evt_data)
         pass #en

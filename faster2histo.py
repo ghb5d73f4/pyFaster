@@ -6,7 +6,8 @@ Usage:
 '''
 
 import faster
-from pyhisto import Histogram as histo
+#from pyhisto import Histogram as histo
+from pyhisto import LazyHistogram as histo
 import parse_args
 import sys,os
 
@@ -30,13 +31,12 @@ if __name__=="__main__":
             assert(os.path.isfile(f))
         
             for evt in faster.File_reader(f, args['nmax']):
-                if evt.label==args['label']:
-                    h1.fast_fill(evt.data['value'])
-                elif evt.type=='group':
-                    for subevt in evt.data:
+                if evt.type_alias==10:
+                    for subevt in evt.data['events']:
                         if subevt.label==args['label']:
                             h1.fast_fill(subevt.data['value'])
-                
+                elif evt.label==args['label']:
+                    h1.fast_fill(evt.data['value'])
             #end for evt
         #end for f
         print(h1)                
