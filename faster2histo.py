@@ -8,6 +8,7 @@ Usage:
 import faster
 #from pyhisto import Histogram as histo
 from pyhisto import LazyHistogram as histo
+from pyhisto import GhostHistogram as ghisto
 import parse_args
 import sys,os
 
@@ -22,10 +23,12 @@ if __name__=="__main__":
         assert(args['label']>0)
         assert(len(args['free_params'])>=1)
 
+        outputs = {args['label']: histo(args['nbins'],
+                                        args['xmin'], args['xmax']),
+                   }
+        hnull = ghisto()
 
-        h1 = histo(args['nbins'],
-                   args['xmin'], args['xmax'])
-                
+              
         for f in args['free_params']:
             assert(os.path.exists(f))
             assert(os.path.isfile(f))
@@ -34,13 +37,14 @@ if __name__=="__main__":
                 if evt.type_alias==10:
                     for subevt in evt.data['events']:
                         if subevt.label==args['label']:
-                            h1.fast_fill(subevt.data['value'])
+                            outputs[subevt.label].fast_fill(subevt.data['value'])
                 elif evt.label==args['label']:
-                    h1.fast_fill(evt.data['value'])
+                    outputs[evt.label].fast_fill(evt.data['value'])
             #end for evt
         #end for f
-        print(h1)                
-        
-    except:
-        print(sys.exc_info())
+        print(outputs[args['label']])                
+    except Exception as inst:
+        print(type(inst))    # the exception instance
+        print(inst.args)     # arguments stored in .args
+        print(inst)   
         print(__doc__)
