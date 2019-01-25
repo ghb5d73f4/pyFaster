@@ -6,7 +6,7 @@ Usage:
 '''
 
 import faster
-from pyhisto import Histogram as histo
+from pyhisto import LazyHistogram as histo
 import parse_args
 import sys,os
 
@@ -37,7 +37,7 @@ if __name__=="__main__":
                 elif evt.label==args['label']:
                     h1.fast_fill(evt.time-previous_ref_time)
                 elif evt.type=='group':
-                    for subevt in evt.data:
+                    for subevt in evt.data['events']:
                         if subevt.label==args['reflabel']:
                             previous_ref_time=subevt.time
                         elif subevt.label==args['label']:
@@ -47,6 +47,9 @@ if __name__=="__main__":
         #end for f
         print(h1)                
         
-    except:
+    except Exception as inst:
+        print(type(inst))    # the exception instance
+        print(inst.args)     # arguments stored in .args
+        print(inst)  
         print(sys.exc_info())
         print(__doc__)
