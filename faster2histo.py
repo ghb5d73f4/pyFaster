@@ -24,6 +24,7 @@ if __name__=="__main__":
                         help='maximum number of event to read')
     parser.add_argument('--label', type=int,
                         default=0, nargs='?',
+                        required=True,
                         help="Label to read") 
     parser.add_argument('--nbins', type=int, 
                         default=1000, nargs='?', 
@@ -36,6 +37,7 @@ if __name__=="__main__":
                         nargs='?', 
                         help='maximum value in histogram')
     parser.add_argument('files', type=str,
+                        required=True,
                         nargs='*', help="Faster files to read")
     args = parser.parse_args()
     try:        
