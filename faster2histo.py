@@ -37,7 +37,6 @@ if __name__=="__main__":
                         nargs='?', 
                         help='maximum value in histogram')
     parser.add_argument('files', type=str,
-                        required=True,
                         nargs='*', help="Faster files to read")
     args = parser.parse_args()
     try:        
