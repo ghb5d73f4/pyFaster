@@ -12,7 +12,39 @@ import argparse
 import faster
 from pyhisto import LazyHistogram as histo
 
-
+def fasterDeltat(files,
+                 label=0, reflabel=0,
+                 nmax=faster.const.max_number_of_events_in_file,
+                 nbins=1000, tmin=-25000, tmax=65000):
+    '''Return a delta t histogram from files'''
+    try:
+        h1 = histo(args.nbins,
+                   args.tmin, args.tmax)
+        previous_ref_time = 0
+                
+        for f in args.files:
+        
+            for evt in faster.FileReader(f, args.nmax):
+                if evt.label==args.label:
+                    h1.fast_fill(evt.time-previous_ref_time)
+                elif evt.label==args.reflabel:
+                    previous_ref_time=evt.time
+                elif evt.type_alias==10:
+                    for subevt in evt.data['events']:
+                        if subevt.label==args.reflabel:
+                            previous_ref_time=subevt.time
+                        elif subevt.label==args.label:
+                            h1.fast_fill(subevt.time-previous_ref_time)
+            #end for evt
+        #end for f
+        return h1                       
+    except Exception as inst:
+        print(type(inst))    # the exception instance
+        print(inst.args)     # arguments stored in .args
+        print(inst)  
+        print(sys.exc_info())
+        print(__doc__)
+    
 
 if __name__=="__main__":
     parser = argparse.ArgumentParser(description='Faster to Histo converter')
@@ -40,39 +72,7 @@ if __name__=="__main__":
     parser.add_argument('files', type=str,
                         nargs='*', help="Faster files to read")
     args = parser.parse_args()
-    try:
-        assert(args.label>0)
-        assert(len(args.files)>=1)
-        assert(args.reflabel>0)
 
-        h1 = histo(args.nbins,
-                   args.tmin, args.tmax)
-
-        previous_ref_time = 0
-                
-        for f in args.files:
-            assert(os.path.exists(f))
-            assert(os.path.isfile(f))
-        
-            for evt in faster.File_reader(f, args.nmax):
-                if evt.label==args.label:
-                    h1.fast_fill(evt.time-previous_ref_time)
-                elif evt.label==args.reflabel:
-                    previous_ref_time=evt.time
-                elif evt.type_alias==10:
-                    for subevt in evt.data['events']:
-                        if subevt.label==args.reflabel:
-                            previous_ref_time=subevt.time
-                        elif subevt.label==args.label:
-                            h1.fast_fill(subevt.time-previous_ref_time)
-                
-            #end for evt
-        #end for f
-        print(h1)                
-        
-    except Exception as inst:
-        print(type(inst))    # the exception instance
-        print(inst.args)     # arguments stored in .args
-        print(inst)  
-        print(sys.exc_info())
-        print(__doc__)
+    print(fasterDeltat(args.files,
+                       args.label, args.reflabel,
+                       args.nbins, args.tmin, args.tmax))

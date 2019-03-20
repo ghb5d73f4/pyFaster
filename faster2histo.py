@@ -16,6 +16,31 @@ from pyhisto import GhostHistogram as ghisto
 #import parse_args
 
 
+def faster2histo(files,
+                 label=0,
+                 nmax=faster.const.max_number_of_events_in_file,
+                 nbins=1000, xmin=0, xmax=faster.const.max_adc_amplitude):
+    '''Read a series of files and return and histogram'''
+    try:        
+        houtput = histo(args.nbins, args.xmin, args.xmax)
+              
+        for f in args.files:
+            for evt in faster.FileReader(f, args.nmax):
+                if evt.type_alias==10:
+                    for subevt in evt.data['events']:
+                        if subevt.label==args.label:
+                            houtput.fast_fill(subevt.data['value'])
+                elif evt.label==args.label:
+                    houtput.fast_fill(evt.data['value'])
+            #end for evt
+        #end for f
+        return houtput                
+    except Exception as inst:
+        print(type(inst))    # the exception instance
+        print(inst.args)     # arguments stored in .args
+        print(inst)   
+        print(__doc__)
+
 
 if __name__=="__main__":
     parser = argparse.ArgumentParser(description='Faster to Histo converter')
@@ -39,28 +64,7 @@ if __name__=="__main__":
     parser.add_argument('files', type=str,
                         nargs='*', help="Faster files to read")
     args = parser.parse_args()
-    try:        
-        assert(args.label>0)
 
-        houtput = histo(args.nbins, args.xmin, args.xmax)
-
-              
-        for f in args.files:
-            assert(os.path.exists(f))
-            assert(os.path.isfile(f))
-        
-            for evt in faster.File_reader(f, args.nmax):
-                if evt.type_alias==10:
-                    for subevt in evt.data['events']:
-                        if subevt.label==args.label:
-                            houtput.fast_fill(subevt.data['value'])
-                elif evt.label==args.label:
-                    houtput.fast_fill(evt.data['value'])
-            #end for evt
-        #end for f
-        print(houtput)                
-    except Exception as inst:
-        print(type(inst))    # the exception instance
-        print(inst.args)     # arguments stored in .args
-        print(inst)   
-        print(__doc__)
+    print(faster2histo(args.files, args.label,
+                       args.nmax,
+                       args.nbins, args.xmin, args.xmax))
