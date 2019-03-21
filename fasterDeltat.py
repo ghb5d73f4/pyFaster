@@ -19,21 +19,16 @@ def fasterDeltat(files,
     '''Return a delta t histogram from files'''
     try:
         h1 = histo(nbins, tmin, tmax)
-        previous_ref_time = 0
+        ref_time = 0
                 
         for f in files:
-        
             for evt in faster.FileReader(f, nmax):
-                if evt.label==label:
-                    h1.fast_fill(evt.time-previous_ref_time)
-                elif evt.label==reflabel:
-                    previous_ref_time=evt.time
-                elif evt.type_alias==10:
+                if evt.type_alias==10:
+                    # first, find the time of reference
+                    ref_time = next( _.time for _ in evt.data['events'] if _.label==reflabel)
                     for subevt in evt.data['events']:
-                        if subevt.label==reflabel:
-                            previous_ref_time=subevt.time
-                        elif subevt.label==label:
-                            h1.fast_fill(subevt.time-previous_ref_time)
+                        if subevt.label==label:
+                            h1.fast_fill(subevt.time-ref_time)
             #end for evt
         #end for f
         return h1                       
@@ -41,8 +36,6 @@ def fasterDeltat(files,
         print(type(inst))    # the exception instance
         print(inst.args)     # arguments stored in .args
         print(inst)
-        #print(sys.exc_info())
-        #print(__doc__)
     
 
 if __name__=="__main__":
@@ -71,7 +64,6 @@ if __name__=="__main__":
     parser.add_argument('files', type=str,
                         nargs='*', help="Faster files to read")
     args = parser.parse_args()
-    print(args)
     print(fasterDeltat(args.files,
                        args.label, args.reflabel,
                        args.nmax,
