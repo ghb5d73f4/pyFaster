@@ -16,8 +16,8 @@ from pyhisto import Histogram2D as h2d
 def faster2bidim(files,
                  label=0, reflabel=0,
                  nmax=faster.const.max_number_of_events_in_file,
-                 nebins=1000, emin=0, emax=300000,
-                 ntbins=100, tmin=-25000, tmax=65000):
+                 ntbins=100, tmin=-25000, tmax=65000,
+                 nebins=1000, emin=0, emax=300000):
     '''Return a delta t histogram from files'''
     try:
         hbidim = h2d(ntbins, tmin, tmax,
