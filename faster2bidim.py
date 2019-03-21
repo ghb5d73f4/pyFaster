@@ -11,21 +11,24 @@ import argparse
 
 import faster
 from pyhisto import LazyHistogram as histo
+from pyhisto import Histogram2D as h2d 
 
-def fasterDeltat(files,
+def faster2bidim(files,
                  label=0, reflabel=0,
                  nmax=faster.const.max_number_of_events_in_file,
-                 nbins=1000, tmin=-25000., tmax=65000.):
+                 nebins=1000, emin=0, emax=30000,
+                 ntbins=100, tmin=-25000, tmax=65000):
     '''Return a delta t histogram from files'''
     try:
-        h1 = histo(nbins, tmin, tmax)
+        hbidim = h2d(ntbins, tmin, tmax,
+                     nebins, emin, emax)
         previous_ref_time = 0
                 
         for f in files:
-        
             for evt in faster.FileReader(f, nmax):
                 if evt.label==label:
-                    h1.fast_fill(evt.time-previous_ref_time)
+                    hbidim.fast_fill(evt.time-previous_ref_time,
+                                     evt.data.get('value', -1.))
                 elif evt.label==reflabel:
                     previous_ref_time=evt.time
                 elif evt.type_alias==10:
@@ -33,16 +36,15 @@ def fasterDeltat(files,
                         if subevt.label==reflabel:
                             previous_ref_time=subevt.time
                         elif subevt.label==label:
-                            h1.fast_fill(subevt.time-previous_ref_time)
+                            hbidim.fast_fill(evt.time-previous_ref_time,
+                                             evt.data.get('value', -1.))
             #end for evt
         #end for f
-        return h1                       
+        return hbidim                     
     except Exception as inst:
         print(type(inst))    # the exception instance
         print(inst.args)     # arguments stored in .args
-        print(inst)
-        #print(sys.exc_info())
-        #print(__doc__)
+        print(inst)  
     
 
 if __name__=="__main__":
@@ -58,21 +60,32 @@ if __name__=="__main__":
                         default=0, nargs='?',
                         required=True,
                         help="Time refrence label") 
-    parser.add_argument('--nbins', type=int, 
-                        default=1000, nargs='?', 
-                        help='number of bins in histogram')
+    parser.add_argument('--ntbins', type=int, 
+                        default=100, nargs='?', 
+                        help='number of time bins in histogram')
     parser.add_argument('--tmin', type=float, 
-                        default=-25000., nargs='?', 
+                        default=-25000, nargs='?', 
                         help='minimum time in histogram')
     parser.add_argument('--tmax', type=float, 
-                        default=65000.,
+                        default=65000,
                         nargs='?', 
                         help='maximum value in histogram')
+    parser.add_argument('--nebins', type=int, 
+                        default=1000, nargs='?', 
+                        help='number of energy bins in histogram')
+    parser.add_argument('--emin', type=float, 
+                        default=0.0, nargs='?', 
+                        help='minimum energy in histogram')
+    parser.add_argument('--emax', type=float, 
+                        default=300000,
+                        nargs='?', 
+                        help='maximum valueenergy in histogram')
     parser.add_argument('files', type=str,
                         nargs='*', help="Faster files to read")
     args = parser.parse_args()
-    print(args)
-    print(fasterDeltat(args.files,
+
+    print(faster2bidim(args.files,
                        args.label, args.reflabel,
                        args.nmax,
-                       args.nbins, args.tmin, args.tmax))
+                       args.ntbins, args.tmin, args.tmax,
+                       args.nebins, args.emin, args.emax))

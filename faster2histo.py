@@ -22,15 +22,15 @@ def faster2histo(files,
                  nbins=1000, xmin=0, xmax=faster.const.max_adc_amplitude):
     '''Read a series of files and return and histogram'''
     try:        
-        houtput = histo(args.nbins, args.xmin, args.xmax)
+        houtput = histo(nbins, xmin, xmax)
               
-        for f in args.files:
-            for evt in faster.FileReader(f, args.nmax):
+        for f in files:
+            for evt in faster.FileReader(f, nmax):
                 if evt.type_alias==10:
                     for subevt in evt.data['events']:
-                        if subevt.label==args.label:
+                        if subevt.label==label:
                             houtput.fast_fill(subevt.data['value'])
-                elif evt.label==args.label:
+                elif evt.label==label:
                     houtput.fast_fill(evt.data['value'])
             #end for evt
         #end for f
