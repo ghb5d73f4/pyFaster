@@ -16,28 +16,23 @@ from pyhisto import Histogram2D as h2d
 def faster2bidim(files,
                  label=0, reflabel=0,
                  nmax=faster.const.max_number_of_events_in_file,
-                 nebins=1000, emin=0, emax=30000,
+                 nebins=1000, emin=0, emax=300000,
                  ntbins=100, tmin=-25000, tmax=65000):
     '''Return a delta t histogram from files'''
     try:
         hbidim = h2d(ntbins, tmin, tmax,
                      nebins, emin, emax)
-        previous_ref_time = 0
+        ref_time = 0
                 
         for f in files:
             for evt in faster.FileReader(f, nmax):
-                if evt.label==label:
-                    hbidim.fast_fill(evt.time-previous_ref_time,
-                                     evt.data.get('value', -1.))
-                elif evt.label==reflabel:
-                    previous_ref_time=evt.time
-                elif evt.type_alias==10:
+                if evt.type_alias==10:
+                    # first, find the time of reference
+                    ref_time = next( _.time for _ in evt.data['events'] if _.label==reflabel)
                     for subevt in evt.data['events']:
-                        if subevt.label==reflabel:
-                            previous_ref_time=subevt.time
-                        elif subevt.label==label:
-                            hbidim.fast_fill(evt.time-previous_ref_time,
-                                             evt.data.get('value', -1.))
+                        if subevt.label==label:
+                            hbidim.fast_fill(subevt.time-ref_time,
+                                             subevt.data.get('value', -1.))
             #end for evt
         #end for f
         return hbidim                     
