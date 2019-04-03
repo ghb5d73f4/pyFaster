@@ -10,8 +10,8 @@ import sys,os
 import argparse
 
 import faster
-from pyhisto import LazyHistogram as histo
-from pyhisto import Histogram2D as h2d 
+
+from pyhisto import LazyHistogram2D as h2d 
 
 def faster2bidim(files,
                  label=0, reflabel=0,
