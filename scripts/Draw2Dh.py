@@ -11,8 +11,9 @@
 Module docstring
 '''
 
-import os
+import os, sys
 import argparse 
+sys.path.append(os.path.dirname(os.path.realpath(__file__))+"/lib")
 
 import matplotlib.pyplot as plt
 

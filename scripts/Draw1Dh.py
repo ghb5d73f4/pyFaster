@@ -10,8 +10,11 @@
 '''
 Module docstring
 '''
+import sys,os
 
-import os
+#adding scripts path
+sys.path.append(os.path.dirname(os.path.realpath(__file__))+"/lib")
+
 import argparse 
 
 import matplotlib.pyplot as plt
@@ -52,8 +55,8 @@ if __name__=="__main__":
             plt.grid(args.grid)
             plt.xscale(args.xscale)
             plt.yscale(args.yscale)
-            min_ = args.min if args.min>=0 else None
-            max_ = args.max if args.max>=0 else None
+            min_ = None if args.min==-1 else args.min
+            max_ = args.max if args.max!=-1 else None
             plt.step(*(h.slice(min_, max_)).xy(), where='post')
             plt.savefig(f+args.outext)
             plt.close('all')

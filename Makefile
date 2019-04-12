@@ -6,7 +6,7 @@ configure: scripts/lib/pyhisto/__init__.py \
 	cd scripts/lib/faster; git pull -r
 	cd scripts/lib/grapheme; git pull -r
 
-scripts/lib/pyhisto/__init__py:
+scripts/lib/pyhisto/__init__.py:
 	git clone https://gitlab.in2p3.fr/gregoire.henning/pyhisto.git scripts/lib/pyhisto
 
 scripts/lib/faster/__init__.py:
@@ -16,7 +16,7 @@ scripts/lib/grapheme/__init__.py:
 	git clone https://gitlab.in2p3.fr/gregoire.henning/grapheme-faster-config.git scripts/lib/grapheme
 
 clean:
-	rm -rfv scripts/lib/
+	rm -rfv scripts/lib/*
 	rm -rfv __pycache__
 	rm -rfv *.pyc  
 

@@ -15,7 +15,6 @@ import sys,os
 import argparse
 
 #adding scripts path
-print("Adding {0} to sys.path".format(os.path.dirname(os.path.realpath(__file__))))
 sys.path.append(os.path.dirname(os.path.realpath(__file__))+"/lib")
 
 import faster
@@ -39,7 +38,7 @@ if __name__=="__main__":
                         required=True,
                         help="Time refrence label")
     parser.add_argument('--tnbins', type=int, 
-                        default=1100, nargs='?', 
+                        default=1250, nargs='?', 
                         help='number of time bins in histogram')
     parser.add_argument('--tmin', type=float, 
                         default=-1000, nargs='?', 
@@ -62,7 +61,7 @@ if __name__=="__main__":
                         default=1500, nargs='?',
                         help='Number of energy bins in coarse histogram')
     parser.add_argument('--coarsetnbins', type=int,
-                        default=400, nargs='?',
+                        default=625, nargs='?',
                         help='Number of time bins in coarse histogram')
     parser.add_argument('--outputdir', type=str,
                         default='./output', nargs="?",
