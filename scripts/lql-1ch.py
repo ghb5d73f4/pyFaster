@@ -74,9 +74,11 @@ if __name__=="__main__":
     hcounters = h1d(nbins=5, arraytype='d')
     # defines 2D histograms
     h2clean = h2d(args.tnbins, args.tmin, args.tmax,
-                  args.enbins, args.emin, args.emax)
+                  args.enbins, args.emin, args.emax,
+                  arraytype='L')
     h2all = h2d(args.coarsetnbins, args.tmin, args.tmax,
-                args.coarseenbins, args.emin, args.emax)
+                args.coarseenbins, args.emin, args.emax,
+                  arraytype='L')
     counter_label = args.label+1000
     try:
         pass
