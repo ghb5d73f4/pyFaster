@@ -7,3 +7,4 @@ dependencies:
   - matplotlib
   - ipywidgets
   - jupyter_contrib_nbextensions
+  - pyyaml
