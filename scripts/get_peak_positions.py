@@ -43,4 +43,5 @@ if __name__=="__main__":
     if os.path.exists(args.file) and os.path.isfile(args.file):
         h = histo(fromfile=args.file).slice(min_, max_)
         pks = FindPeaks(h, args.npeaks, width=args.width)
-        print(pks.peaks)
+        for p in pks.peaks:
+            print("{0} {1}".format(p.center(), p.count))
