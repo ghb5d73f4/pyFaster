@@ -64,7 +64,7 @@ if __name__=="__main__":
             if args.method=='max':
                 the_position = max(hzoom).center()
             elif args.method=='mean':
-                print("Not implemented yet")
+                the_position = sum( [ b.center()*b.count for b in hzoom])/sum(hzoom)
             elif args.method=='fit':
                 the_position = GaussFit(hzoom).mean
             else:
