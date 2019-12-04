@@ -88,7 +88,12 @@ if __name__=="__main__":
             for evt in faster.FileReader(f, args.nmax):
                 if evt.type_alias==10:
                 # first, find the time of reference
-                    ref_time = next( _.time for _ in evt.data['events'] if _.label==args.reflabel)
+                    try:
+                        ref_time = next( _.time for _ in evt.data['events'] if _.label==args.reflabel)
+                    except:
+                        print("# No reference time in packet: "+evt._repr_head())
+                        #print(evt.rawdata)
+                        continue
                     for subevt in evt.data.get('events', tuple()):
                         if subevt.label==args.label:
                             tof=subevt.time-ref_time
