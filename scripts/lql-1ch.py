@@ -80,20 +80,22 @@ if __name__=="__main__":
                 args.coarseenbins, args.emin, args.emax,
                   arraytype='L')
     counter_label = args.label+1000
+    print("# procssing channel {0}".format(MAP[args.label]))
     try:
         pass
         ref_time = 0
 
         for f in args.files:
+            print("# openning file '{0}'".format(f))
             for evt in faster.FileReader(f, args.nmax):
                 if evt.type_alias==10:
                 # first, find the time of reference
                     try:
-                        ref_time = next( _.time for _ in evt.data['events'] if _.label==args.reflabel)
+                        ref_time = next( _.time for _ in evt.data.get('events', tuple()) if _.label==args.reflabel)
                     except:
-                        print("# No reference time in packet: "+evt._repr_head())
-                        #print(evt.rawdata)
-                        continue
+                        print("# No reference time in packet: "+str(evt))
+                        open("event.dump.fast", 'bw').write(evt.rawdata)
+                        break
                     for subevt in evt.data.get('events', tuple()):
                         if subevt.label==args.label:
                             tof=subevt.time-ref_time
